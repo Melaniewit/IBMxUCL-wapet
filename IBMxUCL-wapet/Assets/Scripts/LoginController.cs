@@ -9,9 +9,9 @@ public class LoginController : MonoBehaviour
 {
     public event Action<PlayerProfile> OnSignedIn;
     public event Action<PlayerProfile> OnAvatarUpdate;
+    public event Action OnSignedOut;
 
     private PlayerInfo playerInfo;
-
     private PlayerProfile playerProfile;
     public PlayerProfile PlayerProfile => playerProfile;
 
@@ -27,7 +27,6 @@ public class LoginController : MonoBehaviour
         {
             var accessToken = PlayerAccountService.Instance.AccessToken;
             await SignInWithUnityAsync(accessToken);
-
         }
         catch (Exception ex)
         {
@@ -66,12 +65,19 @@ public class LoginController : MonoBehaviour
         }
     }
 
+    public void SignOut()
+    {
+        Debug.Log("SignOut method called.");
+        AuthenticationService.Instance.SignOut();
+        OnSignedOut?.Invoke();
+        Debug.Log("SignOut is successful.");
+    }
+
     private void OnDestroy()
     {
         PlayerAccountService.Instance.SignedIn -= SignedIn;
     }
 }
-
 
 [Serializable]
 public struct PlayerProfile

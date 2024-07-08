@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +33,7 @@ public class UILogin : MonoBehaviour
         loginButton.onClick.AddListener(LoginButtonPressed);
         loginController.OnSignedIn += LoginController_OnSignedIn;
         loginController.OnAvatarUpdate += LoginController_OnAvatarUpdate;
+        loginController.OnSignedOut += LoginController_OnSignedOut;
     }
 
     private void OnDisable()
@@ -39,6 +41,7 @@ public class UILogin : MonoBehaviour
         loginButton.onClick.RemoveListener(LoginButtonPressed);
         loginController.OnSignedIn -= LoginController_OnSignedIn;
         loginController.OnAvatarUpdate -= LoginController_OnAvatarUpdate;
+        loginController.OnSignedOut -= LoginController_OnSignedOut;
     }
 
     private async void LoginButtonPressed()
@@ -51,13 +54,17 @@ public class UILogin : MonoBehaviour
         playerProfile = profile;
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
-
-        // If you need to update the UI with user information, add your own methods here
     }
 
     private void LoginController_OnAvatarUpdate(PlayerProfile profile)
     {
         playerProfile = profile;
-        // Update avatar or other UI elements if necessary
+    }
+
+    private void LoginController_OnSignedOut()
+    {
+        Debug.Log("OnSignedOut event received.");
+        userPanel.gameObject.SetActive(false);
+        loginPanel.gameObject.SetActive(true);
     }
 }

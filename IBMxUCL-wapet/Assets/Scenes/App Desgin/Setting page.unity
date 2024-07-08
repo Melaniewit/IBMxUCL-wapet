@@ -495,7 +495,7 @@ PrefabInstance:
     - target: {fileID: 154185466578707510, guid: 8f32fc88440004947b1fcf7d9f0188aa,
         type: 3}
       propertyPath: m_Name
-      value: Sign out Button
+      value: SignOutButton
       objectReference: {fileID: 0}
     - target: {fileID: 1572818907657766194, guid: 8f32fc88440004947b1fcf7d9f0188aa,
         type: 3}
@@ -611,6 +611,42 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313006181111852587, guid: 8f32fc88440004947b1fcf7d9f0188aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313006181111852587, guid: 8f32fc88440004947b1fcf7d9f0188aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313006181111852587, guid: 8f32fc88440004947b1fcf7d9f0188aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7000139436121129482, guid: 831c255ca6e664291b0299a49230b0ba,
+        type: 3}
+    - target: {fileID: 7313006181111852587, guid: 8f32fc88440004947b1fcf7d9f0188aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313006181111852587, guid: 8f32fc88440004947b1fcf7d9f0188aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SignOut
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313006181111852587, guid: 8f32fc88440004947b1fcf7d9f0188aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LoginController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313006181111852587, guid: 8f32fc88440004947b1fcf7d9f0188aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7830157938017795488, guid: 8f32fc88440004947b1fcf7d9f0188aa,
         type: 3}
