@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loginButton: {fileID: 0}
+  signOutButton: {fileID: 8297395590143732716, guid: 032d1f1f0eccb44a199994779dad7c7f,
+    type: 3}
   loginPanelPrefab: {fileID: 8488633558974556321, guid: 158f1755882514a9cb56f45b522dc873,
     type: 3}
   userPanelPrefab: {fileID: 4943088283497953766, guid: 8f32fc88440004947b1fcf7d9f0188aa,
