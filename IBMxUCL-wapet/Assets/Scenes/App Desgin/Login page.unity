@@ -916,6 +916,11 @@ PrefabInstance:
       propertyPath: loginButton
       value: 
       objectReference: {fileID: 1609086648}
+    - target: {fileID: 1834486499626653940, guid: 831c255ca6e664291b0299a49230b0ba,
+        type: 3}
+      propertyPath: loginController
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3555454980125914270, guid: 831c255ca6e664291b0299a49230b0ba,
         type: 3}
       propertyPath: m_LocalPosition.x

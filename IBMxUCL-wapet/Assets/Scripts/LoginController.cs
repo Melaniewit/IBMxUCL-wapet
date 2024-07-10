@@ -9,9 +9,10 @@ public class LoginController : MonoBehaviour
 {
     public event Action<PlayerProfile> OnSignedIn;
     public event Action<PlayerProfile> OnAvatarUpdate;
-    public event Action OnSignedOut;
+    public event Action OnSignedOut;  // Added sign-out event
 
     private PlayerInfo playerInfo;
+
     private PlayerProfile playerProfile;
     public PlayerProfile PlayerProfile => playerProfile;
 
@@ -64,14 +65,20 @@ public class LoginController : MonoBehaviour
             Debug.LogException(ex);
         }
     }
-
     public void SignOut()
     {
-        Debug.Log("SignOut method called.");
-        AuthenticationService.Instance.SignOut();
-        OnSignedOut?.Invoke();
-        Debug.Log("SignOut is successful.");
+        try
+        {
+            AuthenticationService.Instance.SignOut(true); // Ensure credentials are cleared
+            OnSignedOut?.Invoke();
+            Debug.Log("SignOut is successful.");
+        }
+        catch (RequestFailedException ex)
+        {
+            Debug.LogException(ex);
+        }
     }
+
 
     private void OnDestroy()
     {
