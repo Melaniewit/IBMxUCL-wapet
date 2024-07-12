@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 1738984492}
   - component: {fileID: 1738984491}
   m_Layer: 5
-  m_Name: SettingsButton
+  m_Name: change scene button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -972,11 +972,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1834486499626653940, guid: 831c255ca6e664291b0299a49230b0ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 814439723624599299, guid: 831c255ca6e664291b0299a49230b0ba,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3729672234268852748}
   m_SourcePrefab: {fileID: 100100000, guid: 831c255ca6e664291b0299a49230b0ba, type: 3}
+--- !u!1 &3729672234268852746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 814439723624599299, guid: 831c255ca6e664291b0299a49230b0ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 3729672234268852745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3729672234268852747 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7000139436121129482, guid: 831c255ca6e664291b0299a49230b0ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 3729672234268852745}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3729672234268852746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5adccaebbf64ea79f96c3064758b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3729672234268852748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3729672234268852746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3acc1bdee4ba94b17973b8429cf1588e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginButton: {fileID: 1609086648}
+  signOutButton: {fileID: 8297395590143732716, guid: 032d1f1f0eccb44a199994779dad7c7f,
+    type: 3}
+  loginPanelPrefab: {fileID: 8488633558974556321, guid: 158f1755882514a9cb56f45b522dc873,
+    type: 3}
+  userPanelPrefab: {fileID: 4943088283497953766, guid: 8f32fc88440004947b1fcf7d9f0188aa,
+    type: 3}
+  loginController: {fileID: 3729672234268852747}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -19,8 +19,6 @@ public class UILogin : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("UILogin Start called.");
-
         // Instantiate panels from prefabs
         loginPanel = Instantiate(loginPanelPrefab, transform).transform;
         userPanel = Instantiate(userPanelPrefab, transform).transform;
@@ -60,10 +58,9 @@ public class UILogin : MonoBehaviour
             loginController.OnSignedOut += LoginController_OnSignedOut;
         }
 
-        // Add sign out button listener
+        // Add sign out button listener dynamically
         if (signOutButton != null)
         {
-            Debug.Log("Adding listener to signOutButton.");
             signOutButton.onClick.AddListener(SignOutButtonPressed);
         }
         else
@@ -88,7 +85,7 @@ public class UILogin : MonoBehaviour
             loginController.OnSignedOut -= LoginController_OnSignedOut;
         }
 
-        // Remove sign out button listener
+        // Remove sign out button listener dynamically
         if (signOutButton != null)
         {
             signOutButton.onClick.RemoveListener(SignOutButtonPressed);
@@ -97,7 +94,6 @@ public class UILogin : MonoBehaviour
 
     private async void LoginButtonPressed()
     {
-        Debug.Log("LoginButton pressed.");
         if (loginController != null)
         {
             await loginController.InitSignIn();
@@ -106,7 +102,6 @@ public class UILogin : MonoBehaviour
 
     private void LoginController_OnSignedIn(PlayerProfile profile)
     {
-        Debug.Log("OnSignedIn event received.");
         playerProfile = profile;
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
@@ -124,13 +119,20 @@ public class UILogin : MonoBehaviour
         loginPanel.gameObject.SetActive(true);
     }
 
-    public void SignOutButtonPressed()
+    private void SignOutButtonPressed()
     {
         Debug.Log("SignOut button pressed.");
+        signOutButton.GetComponentInChildren<Text>().text = "Clicked!";
         if (loginController != null)
         {
             Debug.Log("Calling SignOut method.");
             loginController.SignOut();
         }
+        else
+        {
+            Debug.LogError("LoginController is not assigned.");
+        }
     }
+
+
 }
