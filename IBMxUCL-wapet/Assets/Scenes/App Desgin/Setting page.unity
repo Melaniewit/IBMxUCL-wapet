@@ -662,7 +662,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 3.9064486, w: -8.270538}
+  m_margin: {x: 0, y: 0, z: 3.9064486, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -709,12 +709,12 @@ PrefabInstance:
     - target: {fileID: 467208491660905009, guid: 032d1f1f0eccb44a199994779dad7c7f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 626.2822
+      value: 687.4166
       objectReference: {fileID: 0}
     - target: {fileID: 467208491660905009, guid: 032d1f1f0eccb44a199994779dad7c7f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 258.2719
+      value: 345.879
       objectReference: {fileID: 0}
     - target: {fileID: 467208491660905009, guid: 032d1f1f0eccb44a199994779dad7c7f,
         type: 3}
@@ -754,12 +754,12 @@ PrefabInstance:
     - target: {fileID: 467208491660905009, guid: 032d1f1f0eccb44a199994779dad7c7f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -26.094408
+      value: -12.9533
       objectReference: {fileID: 0}
     - target: {fileID: 467208491660905009, guid: 032d1f1f0eccb44a199994779dad7c7f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -413.10785
+      value: -456.91135
       objectReference: {fileID: 0}
     - target: {fileID: 467208491660905009, guid: 032d1f1f0eccb44a199994779dad7c7f,
         type: 3}
@@ -789,7 +789,7 @@ PrefabInstance:
     - target: {fileID: 8297395590143732716, guid: 032d1f1f0eccb44a199994779dad7c7f,
         type: 3}
       propertyPath: m_Colors.m_FadeDuration
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8297395590143732716, guid: 032d1f1f0eccb44a199994779dad7c7f,
         type: 3}
@@ -896,8 +896,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 108, y: -1828.7527}
-  m_SizeDelta: {x: 530.1336, y: 376.3654}
+  m_AnchoredPosition: {x: 145, y: -1869.8}
+  m_SizeDelta: {x: 588.02783, y: 1079.3665}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8699099437994176001
 MonoBehaviour:
