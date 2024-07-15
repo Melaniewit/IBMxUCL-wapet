@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class UILogin : MonoBehaviour
 {
@@ -9,8 +8,7 @@ public class UILogin : MonoBehaviour
     [SerializeField] private Button signOutButton; // Reference to SignOutButton on userPanel
 
     [SerializeField] private GameObject loginPanelPrefab; // Reference to LoginPanel prefab
-    [SerializeField] private GameObject userPanelPrefab;  // Reference to UserPanel prefab
-    [SerializeField] private GameObject popupPrefab; // Reference to Popup prefab
+    [SerializeField] private GameObject userPanelPrefab;  // Reference to userPanel prefab
 
     private Transform loginPanel;
     private Transform userPanel;
@@ -46,6 +44,11 @@ public class UILogin : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("OnEnable called");
+        Debug.Log("loginButton: " + (loginButton != null ? "Not null" : "Null"));
+        Debug.Log("signOutButton: " + (signOutButton != null ? "Not null" : "Null"));
+        Debug.Log("loginController: " + (loginController != null ? "Not null" : "Null"));
+
         loginButton.onClick.AddListener(LoginButtonPressed);
 
         if (loginController != null)
@@ -55,6 +58,7 @@ public class UILogin : MonoBehaviour
             loginController.OnSignedOut += LoginController_OnSignedOut;
         }
 
+        // Add sign out button listener dynamically
         if (signOutButton != null)
         {
             signOutButton.onClick.AddListener(SignOutButtonPressed);
@@ -67,6 +71,11 @@ public class UILogin : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.Log("OnDisable called");
+        Debug.Log("loginButton: " + (loginButton != null ? "Not null" : "Null"));
+        Debug.Log("signOutButton: " + (signOutButton != null ? "Not null" : "Null"));
+        Debug.Log("loginController: " + (loginController != null ? "Not null" : "Null"));
+
         loginButton.onClick.RemoveListener(LoginButtonPressed);
 
         if (loginController != null)
@@ -76,6 +85,7 @@ public class UILogin : MonoBehaviour
             loginController.OnSignedOut -= LoginController_OnSignedOut;
         }
 
+        // Remove sign out button listener dynamically
         if (signOutButton != null)
         {
             signOutButton.onClick.RemoveListener(SignOutButtonPressed);
@@ -95,8 +105,6 @@ public class UILogin : MonoBehaviour
         playerProfile = profile;
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
-
-        ShowPopup("Sign in successful!", () => SceneManager.LoadScene("MenuPage"));
     }
 
     private void LoginController_OnAvatarUpdate(PlayerProfile profile)
@@ -106,31 +114,25 @@ public class UILogin : MonoBehaviour
 
     private void LoginController_OnSignedOut()
     {
+        Debug.Log("OnSignedOut event received.");
         userPanel.gameObject.SetActive(false);
         loginPanel.gameObject.SetActive(true);
-
-        ShowPopup("Sign out successful!", () => SceneManager.LoadScene("LoginPage"));
     }
 
     private void SignOutButtonPressed()
     {
+        Debug.Log("SignOut button pressed.");
+        signOutButton.GetComponentInChildren<Text>().text = "Clicked!";
         if (loginController != null)
         {
+            Debug.Log("Calling SignOut method.");
             loginController.SignOut();
+        }
+        else
+        {
+            Debug.LogError("LoginController is not assigned.");
         }
     }
 
-    private void ShowPopup(string message, Action onClose)
-    {
-        GameObject popupInstance = Instantiate(popupPrefab, transform);
-        Text popupText = popupInstance.GetComponentInChildren<Text>();
-        Button closeButton = popupInstance.GetComponentInChildren<Button>();
 
-        popupText.text = message;
-        closeButton.onClick.AddListener(() =>
-        {
-            Destroy(popupInstance);
-            onClose.Invoke();
-        });
-    }
 }
