@@ -1257,6 +1257,10 @@ MonoBehaviour:
     type: 3}
   userPanelPrefab: {fileID: 4943088283497953766, guid: 8f32fc88440004947b1fcf7d9f0188aa,
     type: 3}
+  signInPopUpPrefab: {fileID: 5702472849996828160, guid: 050f7ba219724479fa86d5bee4941337,
+    type: 3}
+  signOutPopUpPrefab: {fileID: 3286670235022943702, guid: d5875fcef684644d9b300c6c158577d3,
+    type: 3}
   loginController: {fileID: 3729672234268852747}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
