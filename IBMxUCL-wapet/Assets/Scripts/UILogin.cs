@@ -1,94 +1,71 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UILogin : MonoBehaviour
 {
     [SerializeField] private Button loginButton;
-    [SerializeField] private Button signOutButton; // Reference to SignOutButton on userPanel
+    [SerializeField] private Button signOutButton;
+    [SerializeField] private GameObject loginPanelPrefab;
+    [SerializeField] private GameObject userPanelPrefab;
+    [SerializeField] private GameObject signInPopUpPrefab; // Reference to the sign-in pop-up prefab
+    [SerializeField] private GameObject signOutPopUpPrefab; // Reference to the sign-out pop-up prefab
 
-    [SerializeField] private GameObject loginPanelPrefab; // Reference to LoginPanel prefab
-    [SerializeField] private GameObject userPanelPrefab;  // Reference to userPanel prefab
-
+    private GameObject signInPopUp;
+    private GameObject signOutPopUp;
     private Transform loginPanel;
     private Transform userPanel;
 
     [SerializeField] private LoginController loginController;
 
-    private PlayerProfile playerProfile;
-
     private void Start()
     {
-        // Instantiate panels from prefabs
         loginPanel = Instantiate(loginPanelPrefab, transform).transform;
         userPanel = Instantiate(userPanelPrefab, transform).transform;
+        signInPopUp = Instantiate(signInPopUpPrefab, transform);
+        signOutPopUp = Instantiate(signOutPopUpPrefab, transform);
 
-        // Ensure only login panel is active initially
+        // Initially hide pop-ups
+        signInPopUp.SetActive(false);
+        signOutPopUp.SetActive(false);
+
         loginPanel.gameObject.SetActive(true);
         userPanel.gameObject.SetActive(false);
 
-        // Check if loginController is assigned
+        SetupLoginController();
+    }
+
+    private void SetupLoginController()
+    {
+        // Ensure the loginController is set, or find it if not
         if (loginController == null)
         {
             loginController = FindObjectOfType<LoginController>();
             if (loginController == null)
             {
-                Debug.LogError("LoginController is not assigned and cannot be found in the scene.");
-            }
-            else
-            {
-                Debug.Log("LoginController found and assigned.");
+                Debug.LogError("LoginController not found.");
+                return;
             }
         }
+
+        loginController.OnSignedIn += LoginController_OnSignedIn;
+        loginController.OnSignedOut += LoginController_OnSignedOut;
     }
 
     private void OnEnable()
     {
-        Debug.Log("OnEnable called");
-        Debug.Log("loginButton: " + (loginButton != null ? "Not null" : "Null"));
-        Debug.Log("signOutButton: " + (signOutButton != null ? "Not null" : "Null"));
-        Debug.Log("loginController: " + (loginController != null ? "Not null" : "Null"));
-
         loginButton.onClick.AddListener(LoginButtonPressed);
-
-        if (loginController != null)
-        {
-            loginController.OnSignedIn += LoginController_OnSignedIn;
-            loginController.OnAvatarUpdate += LoginController_OnAvatarUpdate;
-            loginController.OnSignedOut += LoginController_OnSignedOut;
-        }
-
-        // Add sign out button listener dynamically
-        if (signOutButton != null)
-        {
-            signOutButton.onClick.AddListener(SignOutButtonPressed);
-        }
-        else
-        {
-            Debug.LogError("SignOutButton is not assigned.");
-        }
+        signOutButton.onClick.AddListener(SignOutButtonPressed);
     }
 
     private void OnDisable()
     {
-        Debug.Log("OnDisable called");
-        Debug.Log("loginButton: " + (loginButton != null ? "Not null" : "Null"));
-        Debug.Log("signOutButton: " + (signOutButton != null ? "Not null" : "Null"));
-        Debug.Log("loginController: " + (loginController != null ? "Not null" : "Null"));
-
         loginButton.onClick.RemoveListener(LoginButtonPressed);
+        signOutButton.onClick.RemoveListener(SignOutButtonPressed);
 
         if (loginController != null)
         {
             loginController.OnSignedIn -= LoginController_OnSignedIn;
-            loginController.OnAvatarUpdate -= LoginController_OnAvatarUpdate;
             loginController.OnSignedOut -= LoginController_OnSignedOut;
-        }
-
-        // Remove sign out button listener dynamically
-        if (signOutButton != null)
-        {
-            signOutButton.onClick.RemoveListener(SignOutButtonPressed);
         }
     }
 
@@ -102,37 +79,25 @@ public class UILogin : MonoBehaviour
 
     private void LoginController_OnSignedIn(PlayerProfile profile)
     {
-        playerProfile = profile;
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
-    }
-
-    private void LoginController_OnAvatarUpdate(PlayerProfile profile)
-    {
-        playerProfile = profile;
+        Debug.Log("Sign-In Successful, showing pop-up");
+        signInPopUp.SetActive(true); // Show sign-in pop-up
     }
 
     private void LoginController_OnSignedOut()
     {
-        Debug.Log("OnSignedOut event received.");
         userPanel.gameObject.SetActive(false);
         loginPanel.gameObject.SetActive(true);
+        Debug.Log("Sign-Out Successful, showing pop-up");
+        signOutPopUp.SetActive(true); // Show sign-out pop-up
     }
 
     private void SignOutButtonPressed()
     {
-        Debug.Log("SignOut button pressed.");
-        signOutButton.GetComponentInChildren<Text>().text = "Clicked!";
         if (loginController != null)
         {
-            Debug.Log("Calling SignOut method.");
             loginController.SignOut();
         }
-        else
-        {
-            Debug.LogError("LoginController is not assigned.");
-        }
     }
-
-
 }
