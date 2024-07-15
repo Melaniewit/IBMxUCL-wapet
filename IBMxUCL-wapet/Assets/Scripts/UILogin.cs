@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+
 
 public class UILogin : MonoBehaviour
 {
@@ -17,26 +19,26 @@ public class UILogin : MonoBehaviour
 
     [SerializeField] private LoginController loginController;
 
+    private PlayerProfile playerProfile;  // Declare the PlayerProfile variable
+
     private void Start()
     {
         loginPanel = Instantiate(loginPanelPrefab, transform).transform;
         userPanel = Instantiate(userPanelPrefab, transform).transform;
         signInPopUp = Instantiate(signInPopUpPrefab, transform);
+        Debug.Log("Instantiated SignIn Pop-Up at position: " + signInPopUp.transform.position);
         signOutPopUp = Instantiate(signOutPopUpPrefab, transform);
-
-        // Initially hide pop-ups
-        signInPopUp.SetActive(false);
-        signOutPopUp.SetActive(false);
 
         loginPanel.gameObject.SetActive(true);
         userPanel.gameObject.SetActive(false);
+        signInPopUp.SetActive(false);
+        signOutPopUp.SetActive(false);
 
         SetupLoginController();
     }
 
     private void SetupLoginController()
     {
-        // Ensure the loginController is set, or find it if not
         if (loginController == null)
         {
             loginController = FindObjectOfType<LoginController>();
@@ -77,20 +79,28 @@ public class UILogin : MonoBehaviour
         }
     }
 
+    private IEnumerator ShowPopUpAfterDelay(GameObject popUp, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        popUp.SetActive(true);
+        Debug.Log(popUp.name + " should now be visible.");
+    }
+
     private void LoginController_OnSignedIn(PlayerProfile profile)
     {
+        playerProfile = profile;
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
-        Debug.Log("Sign-In Successful, showing pop-up");
-        signInPopUp.SetActive(true); // Show sign-in pop-up
+        StartCoroutine(ShowPopUpAfterDelay(signInPopUp, 0.5f));  // Delay to ensure visibility
     }
+
 
     private void LoginController_OnSignedOut()
     {
         userPanel.gameObject.SetActive(false);
         loginPanel.gameObject.SetActive(true);
+        signOutPopUp.SetActive(true);
         Debug.Log("Sign-Out Successful, showing pop-up");
-        signOutPopUp.SetActive(true); // Show sign-out pop-up
     }
 
     private void SignOutButtonPressed()
@@ -100,4 +110,6 @@ public class UILogin : MonoBehaviour
             loginController.SignOut();
         }
     }
+
+
 }
