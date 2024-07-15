@@ -82,17 +82,30 @@ public class UILogin : MonoBehaviour
     private IEnumerator ShowPopUpAfterDelay(GameObject popUp, float delay)
     {
         yield return new WaitForSeconds(delay);
+        Debug.Log("Before activating: " + popUp.name + " active state: " + popUp.activeSelf);
         popUp.SetActive(true);
-        Debug.Log(popUp.name + " should now be visible.");
+        Debug.Log("After activating: " + popUp.name + " active state: " + popUp.activeSelf);
     }
+
 
     private void LoginController_OnSignedIn(PlayerProfile profile)
     {
-        playerProfile = profile;
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
-        StartCoroutine(ShowPopUpAfterDelay(signInPopUp, 0.5f));  // Delay to ensure visibility
+        Debug.Log("Before activating SignInPopUp: Active State = " + signInPopUp.activeSelf);
+        signInPopUp.SetActive(true);
+        StartCoroutine(CheckPopUpVisibility());
+        Debug.Log("After activating SignInPopUp: Active State = " + signInPopUp.activeSelf);
     }
+
+    private IEnumerator CheckPopUpVisibility()
+    {
+        yield return null; // Wait for one frame
+        Debug.Log("One frame later: SignInPopUp active state: " + signInPopUp.activeSelf);
+        yield return new WaitForSeconds(1); // Wait for one second
+        Debug.Log("One second later: SignInPopUp active state: " + signInPopUp.activeSelf);
+    }
+
 
 
     private void LoginController_OnSignedOut()
@@ -110,6 +123,7 @@ public class UILogin : MonoBehaviour
             loginController.SignOut();
         }
     }
+
 
 
 }
