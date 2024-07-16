@@ -27,5 +27,11 @@ EditorBuildSettings:
     path: Assets/Scenes/App Desgin/Option2-upload photo.unity
     guid: 9add9451e1ab447c891c0ef0aff92f68
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 648bf1c6bdc294f79b8741465a9dcce2,
+      type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: fbf3d56a1a7bf4fce8eb8fa0e53ddb51, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 704b71fba6d854000a9b855403384f60,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 875bfb5ec39dd48faaec61df685587dd,
+      type: 2}
