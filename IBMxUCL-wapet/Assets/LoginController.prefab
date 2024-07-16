@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3555454980125914270}
   - component: {fileID: 7000139436121129482}
   - component: {fileID: 1834486499626653940}
+  - component: {fileID: -4960447557426330388}
   m_Layer: 0
   m_Name: LoginController
   m_TagString: Untagged
@@ -64,4 +65,18 @@ MonoBehaviour:
     type: 3}
   userPanelPrefab: {fileID: 4943088283497953766, guid: 8f32fc88440004947b1fcf7d9f0188aa,
     type: 3}
+  signInPopUpPrefab: {fileID: 0}
+  signOutPopUpPrefab: {fileID: 0}
   loginController: {fileID: 7000139436121129482}
+--- !u!114 &-4960447557426330388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814439723624599299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46d0d48415354f448609621ba1da175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
