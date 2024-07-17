@@ -9,9 +9,5 @@ public class SceneSwitcher : MonoBehaviour
         SceneManager.LoadScene("Setting page");
     }
 
-    // Method to load the login scene
-    public void LoadLoginScene()
-    {
-        SceneManager.LoadScene("Login page");
-    }
+
 }
