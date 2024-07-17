@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 15185438}
   - component: {fileID: 15185437}
   m_Layer: 5
-  m_Name: LoadTestAssetButton
+  m_Name: LoadPetAssetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
