@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/App Desgin/Option2-upload photo.unity
     guid: 9add9451e1ab447c891c0ef0aff92f68
   - enabled: 0
-    path: Assets/Scenes/App Desgin/AR implement.unity
+    path: Assets/Scenes/App Desgin/animated AR.unity
     guid: 5195b2ad516ac4650b52cbdc8733cdf0
   - enabled: 1
     path: Assets/Scenes/App Desgin/AR final.unity
