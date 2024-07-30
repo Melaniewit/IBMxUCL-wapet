@@ -1,5 +1,4 @@
-﻿/* Scripted by Omabu - omabuarts@gmail.com */
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -8,30 +7,56 @@ public class Demo : MonoBehaviour
 
 	private GameObject[] animals;
 	private int animalIndex;
-	private List<string> animationList = new List<string>
-{
-	"Idle_A",
-	"Walk",
-	"Bounce",
-	"Clicked",
-	"Eat",
-	"Fly",
-	"Jump",
-	"Run",
-	"Sit",
-	"Swim"
+	private List<string> animationList = new List<string> //changed!!
+                                            {   "Idle_A", //changed!!
+                                                "Walk",   //changed!!
+                                                "Bounce", //changed!!
+                                                "Clicked",//changed!!
+                                                "Eat",    //changed!!
+                                                "Fly",    //changed!!
+                                                "Jump",   //changed!!
+                                                "Run",    //changed!!
+                                                "Sit",    //changed!!
+                                                "Swim",   //changed!!
+                                                "Spin"    //changed!!
+                                            }; //changed!!
+	private List<string> shapekeyList = new List<string> //changed!!
+                                            {   "Eyes_Blink",   //changed!!
+                                                "Eyes_Excited", //changed!!
+                                                "Eyes_Happy",   //changed!!
+                                                "Eyes_Sad",     //changed!!
+                                                "Eyes_Sleep",   //changed!!
+                                                "Eyes_Annoyed", //changed!!
+                                                "Eyes_Cry"      //changed!!
+                                            }; //changed!!
 
-};
-	private List<string> shapekeyList = new List<string>
-											{
-												"Eyes_Blink",
-												"Eyes_Excited",
-												"Eyes_Happy",
-												"Eyes_Sad",
-												"Eyes_Sleep",
-												"Eyes_Annoyed",
-												"Eyes_Cry",
-											};
+	// Dictionary to map original animation names to display names //changed!!
+	private Dictionary<string, string> animationNameMap = new Dictionary<string, string> //changed!!
+    { //changed!!
+        { "Idle_A", "Idle" },       //changed!!
+        { "Walk", "Walk" },         //changed!!
+        { "Bounce", "Bounce" },     //changed!!
+        { "Clicked", "Clicked" },   //changed!!
+        { "Eat", "Eat" },           //changed!!
+        { "Fly", "Fly" },           //changed!!
+        { "Jump", "Jump" },         //changed!!
+        { "Run", "Run" },           //changed!!
+        { "Sit", "Sit" },           //changed!!
+        { "Swim", "Swim" },         //changed!!
+        { "Spin", "Spin" }          //changed!!
+    }; //changed!!
+
+	// Dictionary to map original shapekey names to display names //changed!!
+	private Dictionary<string, string> shapekeyNameMap = new Dictionary<string, string> //changed!!
+    { //changed!!
+        { "Eyes_Blink", "Blink" },      //changed!!
+        { "Eyes_Excited", "Excited" },  //changed!!
+        { "Eyes_Happy", "Happy" },      //changed!!
+        { "Eyes_Sad", "Sad" },          //changed!!
+        { "Eyes_Sleep", "Sleep" },      //changed!!
+        { "Eyes_Annoyed", "Annoyed" },  //changed!!
+        { "Eyes_Cry", "Cry" }           //changed!!
+    }; //changed!!
 
 	[Space(10)]
 	Transform animal_parent;
@@ -41,13 +66,11 @@ public class Demo : MonoBehaviour
 
 	void Start()
 	{
-
 		animal_parent = GameObject.Find("Animals").transform;
 		Transform canvas = GameObject.Find("Canvas").transform;
 		dropdownAnimal = canvas.Find("Animal").Find("Dropdown").GetComponent<Dropdown>();
 		dropdownAnimation = canvas.Find("Animation").Find("Dropdown").GetComponent<Dropdown>();
 		dropdownShapekey = canvas.Find("Shapekey").Find("Dropdown").GetComponent<Dropdown>();
-
 
 		int count = animal_parent.childCount;
 		animals = new GameObject[count];
@@ -58,37 +81,45 @@ public class Demo : MonoBehaviour
 			animals[i] = animal_parent.GetChild(i).gameObject;
 			string n = animal_parent.GetChild(i).name;
 			animalList.Add(n);
-			// animalList.Add(n.Substring(0, n.IndexOf("_")));
-
 			if (i == 0) animals[i].SetActive(true);
 			else animals[i].SetActive(false);
 		}
 
 		dropdownAnimal.AddOptions(animalList);
-		dropdownAnimation.AddOptions(animationList);
-		dropdownShapekey.AddOptions(shapekeyList);
 
-		// Set to eyes_blink
+		// Use the mapped display names instead of the original names //changed!!
+		List<string> displayAnimationList = new List<string>(); //changed!!
+		foreach (string anim in animationList)
+		{ //changed!!
+			string displayName = animationNameMap.ContainsKey(anim) ? animationNameMap[anim] : anim; //changed!!
+			displayAnimationList.Add(displayName); //changed!!
+		} //changed!!
+		dropdownAnimation.ClearOptions(); //changed!!
+		dropdownAnimation.AddOptions(displayAnimationList); //changed!!
+
+		// Use the mapped display names for shape keys //changed!!
+		List<string> displayShapekeyList = new List<string>(); //changed!!
+		foreach (string shapekey in shapekeyList)
+		{ //changed!!
+			string displayName = shapekeyNameMap.ContainsKey(shapekey) ? shapekeyNameMap[shapekey] : shapekey; //changed!!
+			displayShapekeyList.Add(displayName); //changed!!
+		} //changed!!
+		dropdownShapekey.ClearOptions(); //changed!!
+		dropdownShapekey.AddOptions(displayShapekeyList); //changed!!
+
 		dropdownShapekey.value = 1;
 		ChangeShapekey();
-
-		// Bounds b = animals[0].transform.GetChild(0).GetChild(0).GetComponent<Renderer>().bounds;
 	}
 
 	void Update()
 	{
 		if (Input.GetKeyDown("up")) { PrevAnimal(); }
 		else if (Input.GetKeyDown("down")) { NextAnimal(); }
-		else if (Input.GetKeyDown("right")
-			&& (Input.GetKey(KeyCode.LeftControl)
-			|| Input.GetKey(KeyCode.RightControl))) { NextShapekey(); }
-		else if (Input.GetKeyDown("left")
-			&& (Input.GetKey(KeyCode.LeftControl)
-			|| Input.GetKey(KeyCode.RightControl))) { PrevShapekey(); }
+		else if (Input.GetKeyDown("right") && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))) { NextShapekey(); }
+		else if (Input.GetKeyDown("left") && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))) { PrevShapekey(); }
 		else if (Input.GetKeyDown("right")) { NextAnimation(); }
 		else if (Input.GetKeyDown("left")) { PrevAnimation(); }
 	}
-
 
 	public void NextAnimal()
 	{
@@ -130,7 +161,6 @@ public class Demo : MonoBehaviour
 		ChangeAnimation();
 	}
 
-
 	public void PrevAnimation()
 	{
 		if (dropdownAnimation.value <= 0)
@@ -146,26 +176,10 @@ public class Demo : MonoBehaviour
 		Animator animator = animals[dropdownAnimal.value].GetComponent<Animator>();
 		if (animator != null)
 		{
-			int index = dropdownAnimation.value;
+			string animName = animationList[dropdownAnimation.value]; //changed!!
+			string mappedName = animationNameMap.ContainsKey(animName) ? animationNameMap[animName] : animName; //changed!!
 
-			// If Spin/Splash animation
-			if (index == 15)
-			{
-				if (animator.HasState(0, Animator.StringToHash("Spin")))
-				{
-					animator.Play("Spin");
-					// dropdownAnimation.options[index] = new Dropdown.OptionData("Spin");
-				}
-				else if (animator.HasState(0, Animator.StringToHash("Splash")))
-				{
-					animator.Play("Splash");
-					// dropdownAnimation.options[index] = new Dropdown.OptionData("Splash");
-				}
-			}
-			else
-			{
-				animator.Play(dropdownAnimation.options[index].text);
-			}
+			animator.Play(mappedName); //changed!!
 		}
 	}
 
@@ -194,7 +208,10 @@ public class Demo : MonoBehaviour
 		Animator animator = animals[dropdownAnimal.value].GetComponent<Animator>();
 		if (animator != null)
 		{
-			animator.Play(dropdownShapekey.options[dropdownShapekey.value].text);
+			string shapeKeyName = shapekeyList[dropdownShapekey.value]; //changed!!
+			string mappedName = shapekeyNameMap.ContainsKey(shapeKeyName) ? shapekeyNameMap[shapeKeyName] : shapeKeyName; //changed!!
+
+			animator.Play(mappedName); //changed!!
 		}
 	}
 
