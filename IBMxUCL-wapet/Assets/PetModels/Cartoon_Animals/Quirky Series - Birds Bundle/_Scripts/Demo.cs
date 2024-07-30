@@ -7,56 +7,56 @@ public class Demo : MonoBehaviour
 
 	private GameObject[] animals;
 	private int animalIndex;
-	private List<string> animationList = new List<string> //changed!!
-                                            {   "Idle_A", //changed!!
-                                                "Walk",   //changed!!
-                                                "Bounce", //changed!!
-                                                "Clicked",//changed!!
-                                                "Eat",    //changed!!
-                                                "Fly",    //changed!!
-                                                "Jump",   //changed!!
-                                                "Run",    //changed!!
-                                                "Sit",    //changed!!
-                                                "Swim",   //changed!!
-                                                "Spin"    //changed!!
-                                            }; //changed!!
-	private List<string> shapekeyList = new List<string> //changed!!
-                                            {   "Eyes_Blink",   //changed!!
-                                                "Eyes_Excited", //changed!!
-                                                "Eyes_Happy",   //changed!!
-                                                "Eyes_Sad",     //changed!!
-                                                "Eyes_Sleep",   //changed!!
-                                                "Eyes_Annoyed", //changed!!
-                                                "Eyes_Cry"      //changed!!
-                                            }; //changed!!
+	private List<string> animationList = new List<string>
+											{   "Idle_A",
+												"Walk",
+												"Bounce",
+												"Clicked",
+												"Eat",
+												"Fly",
+												"Jump",
+												"Run",
+												"Sit",
+												"Swim",
+												"Spin"
+											};
+	private List<string> shapekeyList = new List<string>
+											{   "Eyes_Blink",
+												"Eyes_Excited",
+												"Eyes_Happy",
+												"Eyes_Sad",
+												"Eyes_Sleep",
+												"Eyes_Annoyed",
+												"Eyes_Cry"
+											};
 
-	// Dictionary to map original animation names to display names //changed!!
-	private Dictionary<string, string> animationNameMap = new Dictionary<string, string> //changed!!
-    { //changed!!
-        { "Idle_A", "Idle" },       //changed!!
-        { "Walk", "Walk" },         //changed!!
-        { "Bounce", "Bounce" },     //changed!!
-        { "Clicked", "Clicked" },   //changed!!
-        { "Eat", "Eat" },           //changed!!
-        { "Fly", "Fly" },           //changed!!
-        { "Jump", "Jump" },         //changed!!
-        { "Run", "Run" },           //changed!!
-        { "Sit", "Sit" },           //changed!!
-        { "Swim", "Swim" },         //changed!!
-        { "Spin", "Spin" }          //changed!!
-    }; //changed!!
+	// Dictionary to map original animation names to display names
+	private Dictionary<string, string> animationNameMap = new Dictionary<string, string>
+	{
+		{ "Idle_A", "Idle" },
+		{ "Walk", "Walk" },
+		{ "Bounce", "Bounce" },
+		{ "Clicked", "Clicked" },
+		{ "Eat", "Eat" },
+		{ "Fly", "Fly" },
+		{ "Jump", "Jump" },
+		{ "Run", "Run" },
+		{ "Sit", "Sit" },
+		{ "Swim", "Swim" },
+		{ "Spin", "Spin" }
+	};
 
-	// Dictionary to map original shapekey names to display names //changed!!
-	private Dictionary<string, string> shapekeyNameMap = new Dictionary<string, string> //changed!!
-    { //changed!!
-        { "Eyes_Blink", "Blink" },      //changed!!
-        { "Eyes_Excited", "Excited" },  //changed!!
-        { "Eyes_Happy", "Happy" },      //changed!!
-        { "Eyes_Sad", "Sad" },          //changed!!
-        { "Eyes_Sleep", "Sleep" },      //changed!!
-        { "Eyes_Annoyed", "Annoyed" },  //changed!!
-        { "Eyes_Cry", "Cry" }           //changed!!
-    }; //changed!!
+	// Dictionary to map original shapekey names to display names
+	private Dictionary<string, string> shapekeyNameMap = new Dictionary<string, string>
+	{
+		{ "Eyes_Blink", "Blink" },
+		{ "Eyes_Excited", "Excited" },
+		{ "Eyes_Happy", "Happy" },
+		{ "Eyes_Sad", "Sad" },
+		{ "Eyes_Sleep", "Sleep" },
+		{ "Eyes_Annoyed", "Annoyed" },
+		{ "Eyes_Cry", "Cry" }
+	};
 
 	[Space(10)]
 	Transform animal_parent;
@@ -87,25 +87,25 @@ public class Demo : MonoBehaviour
 
 		dropdownAnimal.AddOptions(animalList);
 
-		// Use the mapped display names instead of the original names //changed!!
-		List<string> displayAnimationList = new List<string>(); //changed!!
+		// Use the mapped display names instead of the original names
+		List<string> displayAnimationList = new List<string>();
 		foreach (string anim in animationList)
-		{ //changed!!
-			string displayName = animationNameMap.ContainsKey(anim) ? animationNameMap[anim] : anim; //changed!!
-			displayAnimationList.Add(displayName); //changed!!
-		} //changed!!
-		dropdownAnimation.ClearOptions(); //changed!!
-		dropdownAnimation.AddOptions(displayAnimationList); //changed!!
+		{
+			string displayName = animationNameMap.ContainsKey(anim) ? animationNameMap[anim] : anim;
+			displayAnimationList.Add(displayName);
+		}
+		dropdownAnimation.ClearOptions();
+		dropdownAnimation.AddOptions(displayAnimationList);
 
-		// Use the mapped display names for shape keys //changed!!
-		List<string> displayShapekeyList = new List<string>(); //changed!!
+		// Use the mapped display names for shape keys
+		List<string> displayShapekeyList = new List<string>();
 		foreach (string shapekey in shapekeyList)
-		{ //changed!!
-			string displayName = shapekeyNameMap.ContainsKey(shapekey) ? shapekeyNameMap[shapekey] : shapekey; //changed!!
-			displayShapekeyList.Add(displayName); //changed!!
-		} //changed!!
-		dropdownShapekey.ClearOptions(); //changed!!
-		dropdownShapekey.AddOptions(displayShapekeyList); //changed!!
+		{
+			string displayName = shapekeyNameMap.ContainsKey(shapekey) ? shapekeyNameMap[shapekey] : shapekey;
+			displayShapekeyList.Add(displayName);
+		}
+		dropdownShapekey.ClearOptions();
+		dropdownShapekey.AddOptions(displayShapekeyList);
 
 		dropdownShapekey.value = 1;
 		ChangeShapekey();
@@ -176,10 +176,9 @@ public class Demo : MonoBehaviour
 		Animator animator = animals[dropdownAnimal.value].GetComponent<Animator>();
 		if (animator != null)
 		{
-			string animName = animationList[dropdownAnimation.value]; //changed!!
-			string mappedName = animationNameMap.ContainsKey(animName) ? animationNameMap[animName] : animName; //changed!!
+			string animName = animationList[dropdownAnimation.value]; // Use original name
 
-			animator.Play(mappedName); //changed!!
+			animator.Play(animName); // Play using original name
 		}
 	}
 
@@ -208,10 +207,9 @@ public class Demo : MonoBehaviour
 		Animator animator = animals[dropdownAnimal.value].GetComponent<Animator>();
 		if (animator != null)
 		{
-			string shapeKeyName = shapekeyList[dropdownShapekey.value]; //changed!!
-			string mappedName = shapekeyNameMap.ContainsKey(shapeKeyName) ? shapekeyNameMap[shapeKeyName] : shapeKeyName; //changed!!
+			string shapeKeyName = shapekeyList[dropdownShapekey.value]; // Use original name
 
-			animator.Play(mappedName); //changed!!
+			animator.Play(shapeKeyName); // Play using original name
 		}
 	}
 
