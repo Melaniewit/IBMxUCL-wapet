@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 169860882}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 431, y: 961, z: -983}
+  m_LocalPosition: {x: 415, y: 1240, z: -983}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -470,7 +470,7 @@ PrefabInstance:
     - target: {fileID: 6647131506220806908, guid: 27e82c8a2f2dc474a8d10d84ae09e664,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.227
+      value: 0.243
       objectReference: {fileID: 0}
     - target: {fileID: 6647131506220806908, guid: 27e82c8a2f2dc474a8d10d84ae09e664,
         type: 3}
@@ -1011,7 +1011,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126306676}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: -0.9848078, z: 0, w: 0.17364825}
   m_LocalPosition: {x: 468, y: 400, z: 0}
   m_LocalScale: {x: 982, y: 982, z: 982}
   m_ConstrainProportionsScale: 0
@@ -1026,7 +1026,7 @@ Transform:
   - {fileID: 2013753195}
   - {fileID: 1376988832}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -160, z: 0}
 --- !u!1001 &1266685561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1410,6 +1410,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 53
       objectReference: {fileID: 0}
+    - target: {fileID: 1173349357136177627, guid: 61246ff43d7854967a33fc1a6be08848,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2340839704826943180, guid: 61246ff43d7854967a33fc1a6be08848,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1525,9 +1530,19 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -3
       objectReference: {fileID: 0}
+    - target: {fileID: 7352454163010934777, guid: 61246ff43d7854967a33fc1a6be08848,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7436791874620189588, guid: 61246ff43d7854967a33fc1a6be08848,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596430079410247627, guid: 61246ff43d7854967a33fc1a6be08848,
+        type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7686537542854881912, guid: 61246ff43d7854967a33fc1a6be08848,
