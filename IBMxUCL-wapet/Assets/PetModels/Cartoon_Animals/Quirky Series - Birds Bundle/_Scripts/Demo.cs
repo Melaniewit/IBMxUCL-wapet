@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿/* Scripted by Omabu - omabuarts@gmail.com */
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class Demo : MonoBehaviour
 {
+
     private GameObject[] animals;
     private int animalIndex;
     private List<string> animationList = new List<string>
@@ -57,9 +59,9 @@ public class Demo : MonoBehaviour
         { "Eyes_Cry", "Cry" }
     };
 
-    // Dictionary to store animation speed multipliers  
-    private Dictionary<string, float> animationSpeedMap = new Dictionary<string, float>
-    {
+    // Dictionary to store animation speed multipliers //changed!!
+    private Dictionary<string, float> animationSpeedMap = new Dictionary<string, float> //changed!!
+   {
         { "Idle_A", 0.8f },
         { "Walk", 1.0f },
         { "Bounce", 0.7f },
@@ -72,17 +74,6 @@ public class Demo : MonoBehaviour
         { "Swim", 1.0f },
         { "Spin", 0.3f }
     };
-
-    // Dictionary to store allowed animations for each animal //changed!!
-    private Dictionary<string, List<string>> animalAllowedAnimations = new Dictionary<string, List<string>> //changed!!
-    { //changed!!
-        { "Cat", new List<string> { "Idle_A", "Walk", "Eat", "Jump", "Run", "Sit", "Spin" } }, //changed!!
-        { "Dog", new List<string> { "Idle_A", "Walk", "Eat", "Jump", "Run", "Sit", "Spin" } }, //changed!!
-        { "Goldfish", new List<string> { "Idle_A", "Swim" } }, //changed!!
-        { "Mouse", new List<string> { "Idle_A", "Eat", "Jump", "Run", "Spin" } }, //changed!!
-        { "Rabbit", new List<string> { "Idle_A", "Eat", "Jump", "Run", "Sit", "Spin" } }, //changed!!
-        { "Tortoise", new List<string> { "Idle_A", "Walk", "Eat", "Swim" } } //changed!!
-    }; //changed!!
 
     [Space(10)]
     Transform animal_parent;
@@ -113,9 +104,15 @@ public class Demo : MonoBehaviour
 
         dropdownAnimal.AddOptions(animalList);
 
-        dropdownAnimal.onValueChanged.AddListener(delegate { ChangeAnimal(); }); //changed!!
-
-        UpdateAnimationDropdown(); //changed!!
+        // Use the mapped display names instead of the original names
+        List<string> displayAnimationList = new List<string>();
+        foreach (string anim in animationList)
+        {
+            string displayName = animationNameMap.ContainsKey(anim) ? animationNameMap[anim] : anim;
+            displayAnimationList.Add(displayName);
+        }
+        dropdownAnimation.ClearOptions();
+        dropdownAnimation.AddOptions(displayAnimationList);
 
         // Use the mapped display names for shape keys
         List<string> displayShapekeyList = new List<string>();
@@ -167,8 +164,6 @@ public class Demo : MonoBehaviour
         animals[dropdownAnimal.value].SetActive(true);
         animalIndex = dropdownAnimal.value;
 
-        UpdateAnimationDropdown(); //changed!!
-
         ChangeAnimation();
         ChangeShapekey();
     }
@@ -202,12 +197,12 @@ public class Demo : MonoBehaviour
 
             // Set the animation speed
             if (animationSpeedMap.ContainsKey(animName))
-            {
-                animator.speed = animationSpeedMap[animName];
+            { //changed!!
+                animator.speed = animationSpeedMap[animName]; //changed!!
             }
             else
             {
-                animator.speed = 1.0f; // Default speed  
+                animator.speed = 1.0f; // Default speed //changed!!
             }
 
             animator.Play(animName); // Play using original name
@@ -245,8 +240,8 @@ public class Demo : MonoBehaviour
         }
     }
 
-    // Update the animations in the dropdown based on the selected animal //changed!!
-    private void UpdateAnimationDropdown() //changed!!
-    { //changed!!
-        string currentAnimal = animals[dropdownAnimal.value].name; //changed!!
-        List<string> allowedAnimations = animalAllowedAnimations[currentAnimal];
+    public void GoToWebsite(string URL)
+    {
+        Application.OpenURL(URL);
+    }
+}
