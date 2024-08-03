@@ -1052,6 +1052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 906003379}
   - component: {fileID: 906003378}
+  - component: {fileID: 906003380}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -1092,6 +1093,21 @@ Transform:
   - {fileID: 1981614474}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &906003380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906003377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlanePrefab: {fileID: 2124099406217506051, guid: 1fd2589741837413ab329fca7fb0aacf,
+    type: 3}
+  m_DetectionMode: 1
 --- !u!1 &1126306676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,7 +1123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1126306677
 Transform:
   m_ObjectHideFlags: 0
@@ -1268,7 +1284,7 @@ PrefabInstance:
     - target: {fileID: 645177519315148312, guid: 61246ff43d7854967a33fc1a6be08848,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 645177519315148315, guid: 61246ff43d7854967a33fc1a6be08848,
         type: 3}
