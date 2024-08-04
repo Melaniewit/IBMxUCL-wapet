@@ -9,6 +9,6 @@ public class GoToARPage : MonoBehaviour
     public void OnBackToMenuButtonClicked()
     {
         // Load the scene named "Menu"
-        SceneManager.LoadScene("AR page");
+        SceneManager.LoadScene("AR_plane_detection");
     }
 }
