@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/App Desgin/Menu page.unity
     guid: b72187684bbbc47f4844297e803d0148
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/App Desgin/Option1-choose your pet.unity
     guid: e886a0c2bccbb47c5b66a02cfb9da55a
   - enabled: 0
