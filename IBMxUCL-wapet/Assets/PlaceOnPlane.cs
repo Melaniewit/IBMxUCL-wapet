@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -8,30 +7,18 @@ using UnityEngine.XR.ARSubsystems;
 public class PlaceOnPlane : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("Instantiates this prefab on a plane at the touch location.")]
-    GameObject m_PlacedPrefab;
-
-    UnityEvent placementUpdate;
+    private GameObject m_PlacedPrefab;
 
     [SerializeField]
-    GameObject visualObject;
+    private GameObject visualObject;
 
-    public GameObject placedPrefab
-    {
-        get { return m_PlacedPrefab; }
-        set { m_PlacedPrefab = value; }
-    }
-
-    public GameObject spawnedObject { get; private set; }
+    private ARRaycastManager m_RaycastManager;
+    private GameObject spawnedObject;
+    static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
     void Awake()
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
-
-        if (placementUpdate == null)
-            placementUpdate = new UnityEvent();
-
-        placementUpdate.AddListener(DisableVisual);
     }
 
     bool TryGetTouchPosition(out Vector2 touchPosition)
@@ -51,30 +38,35 @@ public class PlaceOnPlane : MonoBehaviour
         if (!TryGetTouchPosition(out Vector2 touchPosition))
             return;
 
+        Debug.Log("Touch detected at position: " + touchPosition);
+
         if (m_RaycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinPolygon))
         {
+            Debug.Log("Raycast hit plane");
+
             var hitPose = s_Hits[0].pose;
 
             if (spawnedObject == null)
             {
+                Debug.Log("Instantiating object at: " + hitPose.position);
                 spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-                spawnedObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Adjust scale as needed
+                // spawnedObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Adjust as needed
+                Debug.Log("Object instantiated successfully");
             }
             else
             {
+                Debug.Log("Moving object to: " + hitPose.position);
                 spawnedObject.transform.position = hitPose.position;
             }
 
-            placementUpdate.Invoke();
+            if (visualObject != null)
+            {
+                visualObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log("Raycast did not hit plane");
         }
     }
-
-    public void DisableVisual()
-    {
-        visualObject.SetActive(false);
-    }
-
-    static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
-
-    ARRaycastManager m_RaycastManager;
 }

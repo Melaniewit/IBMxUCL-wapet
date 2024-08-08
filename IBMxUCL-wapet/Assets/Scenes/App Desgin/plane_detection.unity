@@ -780,7 +780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be235afabd8054aa8b5d89f19b1fcab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlacedPrefab: {fileID: 3463497062904160881, guid: 945dc3d60c2e54def9aaf1834c7736ee,
+  m_PlacedPrefab: {fileID: 3474247013321600795, guid: 63acd422b77cb4ac6a3be36660fe708f,
     type: 3}
   visualObject: {fileID: 249932465}
 --- !u!1 &878941120
@@ -1499,7 +1499,7 @@ PrefabInstance:
     - target: {fileID: 645177519315148312, guid: 61246ff43d7854967a33fc1a6be08848,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 645177519315148315, guid: 61246ff43d7854967a33fc1a6be08848,
         type: 3}
