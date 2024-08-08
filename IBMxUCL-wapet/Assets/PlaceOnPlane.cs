@@ -9,25 +9,19 @@ public class PlaceOnPlane : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
-    GameObject m_PlacedPrefab;  // Prefab to place on the detected plane
+    GameObject m_PlacedPrefab;
 
-    UnityEvent placementUpdate;  // Event triggered after placement
+    UnityEvent placementUpdate;
 
     [SerializeField]
-    GameObject visualObject;  // Visual guide to indicate placement
+    GameObject visualObject;
 
-    /// <summary>
-    /// The prefab to instantiate on touch.
-    /// </summary>
     public GameObject placedPrefab
     {
         get { return m_PlacedPrefab; }
         set { m_PlacedPrefab = value; }
     }
 
-    /// <summary>
-    /// The object instantiated as a result of a successful raycast intersection with a plane.
-    /// </summary>
     public GameObject spawnedObject { get; private set; }
 
     void Awake()
@@ -37,7 +31,7 @@ public class PlaceOnPlane : MonoBehaviour
         if (placementUpdate == null)
             placementUpdate = new UnityEvent();
 
-        placementUpdate.AddListener(DisableVisual);  // Add listener to disable visual guide upon placement
+        placementUpdate.AddListener(DisableVisual);
     }
 
     bool TryGetTouchPosition(out Vector2 touchPosition)
@@ -59,30 +53,28 @@ public class PlaceOnPlane : MonoBehaviour
 
         if (m_RaycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinPolygon))
         {
-            // Raycast hits are sorted by distance, so the first one will be the closest hit.
             var hitPose = s_Hits[0].pose;
 
             if (spawnedObject == null)
             {
-                // Instantiate the placed prefab at the hit position and rotation
                 spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                spawnedObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Adjust scale as needed
             }
             else
             {
-                // Move the spawned object to the new hit position
                 spawnedObject.transform.position = hitPose.position;
             }
 
-            placementUpdate.Invoke();  // Invoke the placement update event
+            placementUpdate.Invoke();
         }
     }
 
     public void DisableVisual()
     {
-        visualObject.SetActive(false);  // Disable the visual guide
+        visualObject.SetActive(false);
     }
 
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
-    ARRaycastManager m_RaycastManager;  // The AR Raycast Manager component
+    ARRaycastManager m_RaycastManager;
 }
