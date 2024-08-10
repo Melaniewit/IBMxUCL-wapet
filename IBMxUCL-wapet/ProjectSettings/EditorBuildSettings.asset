@@ -38,9 +38,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/App Desgin/AR_plane_detection.unity
     guid: f4908811d8c774801b5f3bf1a62bb640
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/App Desgin/plane_detection.unity
     guid: 26679da2c6acf4693897b6a8c72ff1c4
+  - enabled: 1
+    path: Assets/Scenes/0-AR-MainScene.unity
+    guid: d10c9b8027fa24e17beb894d52225cd1
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 648bf1c6bdc294f79b8741465a9dcce2,
       type: 2}
